@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace NLayer.Service.Mapping
 {
-    public class MapProfile:Profile
+    public class MapProfile : Profile
     {
         public MapProfile()
         {
@@ -19,7 +19,7 @@ namespace NLayer.Service.Mapping
             CreateMap<ProductUpdateDto, Product>();
             CreateMap<Product, ProductWithCategoryDto>();
             CreateMap<Category, CategoryWithProductsDto>();
-           
+            CreateMap<ProductCreateDto, Product>();
         }
     }
 }

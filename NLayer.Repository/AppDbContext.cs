@@ -52,9 +52,11 @@ namespace NLayer.Repository
                     switch (item.State)
                     {
                         case EntityState.Added:
+                            Entry(entityRefference).Property(x => x.UpdatedDate).IsModified = false;
                             entityRefference.CreatedDate = DateTime.Now;
                             break;
                         case EntityState.Modified:
+                            Entry(entityRefference).Property(x => x.CreatedDate).IsModified = false;
                             entityRefference.UpdatedDate = DateTime.Now; break;
                     }
                 }
@@ -70,6 +72,7 @@ namespace NLayer.Repository
                     switch (item.State)
                     {
                         case EntityState.Added:
+                            Entry(entityRefference).Property(x => x.UpdatedDate).IsModified = false;
                             entityRefference.CreatedDate = DateTime.Now;
                             break;
                         case EntityState.Modified:
