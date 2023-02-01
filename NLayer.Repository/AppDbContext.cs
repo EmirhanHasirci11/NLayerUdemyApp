@@ -47,5 +47,42 @@ namespace NLayer.Repository
             );
             base.OnModelCreating(modelBuilder);
         }
+        public override int SaveChanges()
+        {
+            foreach (var item in ChangeTracker.Entries())
+            {
+                if (item.Entity is BaseEntity entityRefference)
+                {
+                    switch (item.State)
+                    {
+                        case EntityState.Added:
+                            entityRefference.CreatedDate = DateTime.Now;
+                            break;
+                        case EntityState.Modified:
+                            entityRefference.UpdatedDate = DateTime.Now; break;
+                    }
+                }
+            }
+            return base.SaveChanges();
+        }
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            foreach (var item in ChangeTracker.Entries())
+            {
+                if (item.Entity is BaseEntity entityRefference)
+                {
+                    switch (item.State)
+                    {
+                        case EntityState.Added:
+                            entityRefference.CreatedDate = DateTime.Now;
+                            break;
+                        case EntityState.Modified:
+                            Entry(entityRefference).Property(x => x.CreatedDate).IsModified = false;
+                            entityRefference.UpdatedDate = DateTime.Now; break;
+                    }
+                }
+            }
+            return base.SaveChangesAsync();
+        }
     }
 }
