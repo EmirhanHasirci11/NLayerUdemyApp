@@ -29,8 +29,6 @@ namespace NLayer.Repository
                 Height = 100,
                 Width = 200,
                 ProductId = 1
-
-
             },
             new ProductFeature()
             {
@@ -39,8 +37,6 @@ namespace NLayer.Repository
                 Height = 300,
                 Width = 500,
                 ProductId = 2
-
-
             }
 
 
